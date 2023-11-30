@@ -39,6 +39,14 @@ async function run() {
 
 const userCollection = client.db("BloodDonation").collection("users");
 const donationCollection = client.db("BloodDonation").collection("donation");
+const blogCollection = client.db("BloodDonation").collection("blogs");
+// blog post api
+app.post('/blogs',async(req,res)=>{
+  const blog=req.body;
+  const result=await blogCollection.insertOne(blog);
+  res.send(result)
+})
+
 // jwt related api
 app.post("/jwt", async (req, res) => {
   const user = req.body;
@@ -70,6 +78,8 @@ app.post("/donation", async (req, res) => {
   const result = await donationCollection.insertOne(donor);
   res.send(result);
 });
+
+
 
 // get the donation request
 app.get("/donation", async (req, res) => {
