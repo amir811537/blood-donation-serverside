@@ -58,6 +58,7 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "forbided access" });
     }
+    console.log(decoded)
     req.decoded = decoded;
     next();
   });
